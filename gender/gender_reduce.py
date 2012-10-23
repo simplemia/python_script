@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+
+import sys
+
+PYID = ""
+CATE = 0
+WEIGHT = 0.0000
+Ocate = 0
+Oweight = 0.0000
+
+wrong = 0
+equal = 0
+
+for line in sys.stdin:
+    if len(line) >5:
+        (pyid, cate, weight) = line.strip().split()
+        cate = int(cate)
+        weight = float(weight)
+        if cate == 10110 or cate == 10111:
+            if pyid == PYID:
+                if Ocate != 0:
+                    if cate != Ocate:
+                        if weight >Oweight:
+                            weight = weight - Oweight
+                            Ocate = 0
+                            print "%s\t%s\t%s" % (pyid, cate, weight)
+                        if weight == Oweight:
+                            weight = 0.000  
+                            Ocate = 0
+                            equal = 0
+                        else:
+                            cate = Ocate
+                            weight = Oweight - weight
+                            Ocate = 0
+                            print "%s\t%s\t%s" % (pyid, cate, weight)
+                    else:
+                        wrong += 1
+                        Ocate = 0
+                else:
+                    Ocate = cate
+                    Oweight =weight
+
+            else:
+                while(Ocate):
+                    print "%s\t%s\t%s" % (PYID, Ocate, Oweight)
+                    Oweight = 0.000
+                    Ocate = 0
+                PYID, CATE, WEGHT = pyid, cate, weight
+                print "%s\t%s\t%s" % (pyid, cate, weight)
+        else:
+            PYID, CATE, WEGHT = pyid, cate, weight
+            print "%s\t%s\t%s" % (pyid, cate, weight)
+
