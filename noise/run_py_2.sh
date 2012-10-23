@@ -15,8 +15,7 @@ fi
 
 if [ -z "${redfile}" ];then
 	echo hadoop jar ${hdstreaming} -mapper "python ${mapfile}" -reducer "cat" -file ${mapfile} \
-    -file part-m-00000 -input ""\
-    -output ${outputdir}
+     -input "" -output ${outputdir}
 else
 	hadoop jar ${hdstreaming} -D mapred.reduce.tasks=50 -mapper "python ${mapfile}" -reducer "python ${redfile}" -file ${mapfile}  -file ${redfile} -input ${inputdir} -output ${outputdir} 
 fi
