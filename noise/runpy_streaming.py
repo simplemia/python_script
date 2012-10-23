@@ -2,15 +2,13 @@
 
 import subprocess as sub
 
-#hdstreaming = "/usr/lib/hadoop-0.20/contrib/streaming/hadoop-streaming.jar"
-#log_path = "/user/root/flume/log_access"
 
 
 #temp = [i.split() for i in open("todo_dir").readlines()]
 temp_dir=[""]
 """
 i = temp_dir[-2]
-cmd = 'hadoop jar "/usr/lib/hadoop-0.20/contrib/streaming/hadoop-streaming.jar" \
+cmd = 'hadoop jar "hadoop-0.20/contrib/streaming/hadoop-streaming.jar" \
         -D mapred.reduce.tasks=50 -mapper "python noise.py" -reducer "cat" -file noise.py \
         -input %s -output %s'%(i,"test/20")
 print cmd
