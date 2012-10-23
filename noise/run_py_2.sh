@@ -1,7 +1,7 @@
 #! /bin/sh
 
-hdstreaming="/usr/lib/hadoop-0.20/contrib/streaming/hadoop-streaming-0.20.2-cdh3u1.jar"
-log_path="/user/root/flume/log_access"
+hdstreaming="hadoop-0.20/contrib/streaming/hadoop-streaming.jar"
+log_path=""
 #pre_day="`date -d '1 days ago' +%Y/%m/%d`"
 outputdir="${1}"
 mapfile="$2"
@@ -15,7 +15,7 @@ fi
 
 if [ -z "${redfile}" ];then
 	echo hadoop jar ${hdstreaming} -mapper "python ${mapfile}" -reducer "cat" -file ${mapfile} \
-    -file part-m-00000 -input "/production/userprofile/V3/summary/dsp/adx/pyid/semiauto/2012/10/16/*"\
+    -file part-m-00000 -input ""\
     -output ${outputdir}
 else
 	hadoop jar ${hdstreaming} -D mapred.reduce.tasks=50 -mapper "python ${mapfile}" -reducer "python ${redfile}" -file ${mapfile}  -file ${redfile} -input ${inputdir} -output ${outputdir} 
